@@ -1,12 +1,16 @@
-import axios from 'axios';
+import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
 import { TincomingPost } from '../models/post';
 
 const baseURL = 'https://jsonplaceholder.typicode.com/';
 
 export type ResponseType<T = unknown> = {
+  config: AxiosRequestConfig,
   data?: T,
-  error?: string,
+  headers: AxiosHeaders,
+  request: XMLHttpRequest,
   status: number,
+  statusText: string,
+  error?: string,
 };
 
 export const handleError = (e:Error) => {

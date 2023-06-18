@@ -1,9 +1,9 @@
 import { handleActions } from 'redux-actions';
-import { TPost } from '../../models/post';
+import { TPost, TincomingPost } from '../../models/post';
 import {
-  LOAD_POST_PENDING,
-  LOAD_POST_SUCCESS,
-  LOAD_POST_FAILURE,
+  LOAD_POSTS_PENDING,
+  LOAD_POSTS_SUCCESS,
+  LOAD_POSTS_FAILURE,
 } from '../actions/post';
 
 export type TPostState = {
@@ -15,7 +15,7 @@ export type TPostState = {
 export type TPostAction = {
   isLoadPostPending: boolean,
   error?: string,
-  posts: TPost[],
+  incomingPosts?: TincomingPost[],
 };
 
 const initialState: TPostState = {
@@ -25,18 +25,26 @@ const initialState: TPostState = {
 };
 
 export const postReducer = handleActions<TPostState, TPostAction>({
-  [LOAD_POST_PENDING]: (state, { payload }) => ({
+  [LOAD_POSTS_PENDING]: (state, { payload }) => ({
     ...state,
     isLoadPostPending: payload.isLoadPostPending,
   }),
 
-  [LOAD_POST_SUCCESS]: (state, { payload }) => ({
-    ...state,
-    posts: payload.posts,
-    loadPostError: undefined,
-  }),
+  [LOAD_POSTS_SUCCESS]: (state, { payload }) => {
+    const posts: TPost[] = payload.incomingPosts?.map((post) => ({
+      id: post.id.toString(),
+      title: post.title,
+      text: post.body,
+    })) || [];
 
-  [LOAD_POST_FAILURE]: (state, { payload }) => ({
+    return ({
+      ...state,
+      posts,
+      loadPostError: undefined,
+    });
+  },
+
+  [LOAD_POSTS_FAILURE]: (state, { payload }) => ({
     ...state,
     loadPostError: payload.error,
     posts: undefined,

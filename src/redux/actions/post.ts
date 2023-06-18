@@ -1,30 +1,30 @@
-import { TPost } from '../../models/post';
+import { TincomingPost } from '../../models/post';
 
-export const LOAD_POST = 'LOAD_POST';
-export const LOAD_POST_PENDING = 'LOAD_POST_PENDING';
-export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
-export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE';
+export const LOAD_POSTS = 'LOAD_POSTS';
+export const LOAD_POSTS_PENDING = 'LOAD_POSTS_PENDING';
+export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
+export const LOAD_POSTS_FAILURE = 'LOAD_POSTS_FAILURE';
 
-export const loadPost = () => ({
-  type: LOAD_POST,
+export const loadPosts = () => ({
+  type: LOAD_POSTS,
 });
 
-export const loadPostPending = (isPending: boolean) => ({
-  type: LOAD_POST_PENDING,
+export const loadPostsPending = (isPending: boolean) => ({
+  type: LOAD_POSTS_PENDING,
   payload: {
     isLoadPostPending: isPending,
   },
 });
 
-export const loadPostSuccess = (posts: TPost[]) => ({
-  type: LOAD_POST_SUCCESS,
+export const loadPostsSuccess = (incomingPosts: TincomingPost[]) => ({
+  type: LOAD_POSTS_SUCCESS,
   payload: {
-    posts,
+    incomingPosts,
   },
 });
 
-export const loadPostFailure = (error: string) => ({
-  type: LOAD_POST_FAILURE,
+export const loadPostsFailure = (error: string) => ({
+  type: LOAD_POSTS_FAILURE,
   payload: {
     error,
   },

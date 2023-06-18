@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import post, { TPostState } from './post';
 
-export type RootReduser = {
+export type TRootState = {
   post: TPostState,
 };
 
