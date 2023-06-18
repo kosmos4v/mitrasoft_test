@@ -6,3 +6,10 @@ export type TPost = {
   avatar: string,
   coments: TComment[],
 };
+
+export type TincomingPost = {
+  body: string,
+  id: number,
+  title: string,
+  userId: number,
+};
