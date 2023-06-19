@@ -5,7 +5,8 @@ import store from './redux/store';
 import Main from './pages/Main';
 import Author from './pages/Author';
 import User from './pages/User';
-import './App.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
 
 function App() {
   return (
