@@ -1,4 +1,7 @@
 export type TComment = {
-  title: string, // email
-  text: string,
+  postId: number,
+  id: number,
+  email: string, // заголовок
+  name: string,
+  body: string, // text
 };
