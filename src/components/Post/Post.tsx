@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Card,
   Button, Container,
@@ -6,36 +6,49 @@ import {
 } from 'react-bootstrap';
 import { TComment } from '../../models/comment';
 
-type PostProps = {
+type TPostProps = {
   title: string,
   text: string,
-  buttonText: string,
   onClickImage?: () => void,
   onClickButton?: () => void,
-  showComments: boolean,
   comments: TComment[];
+  showComments: boolean,
 };
 
-export const Post: React.FC<PostProps> = ({
+export const Post: React.FC<TPostProps> = ({
   title = '',
   text = '',
-  buttonText = 'кнопка',
   onClickImage,
   onClickButton,
   comments,
-  showComments = false,
+  showComments = true,
 }) => {
-  const handlClickButton = () => {
+  const postPicker = React.useRef<HTMLDivElement>(null);
+  const [showPostComments, setPostShowComments] = useState(showComments);
+  const postComments: string = comments.map((comment) => (
+    `$<Accordion key=${comment.id}>
+      <Accordion.Item eventKey=${comment.id.toString()}>
+        <Accordion.Header>${comment.email}</Accordion.Header>
+        <Accordion.Body>${comment.body}</Accordion.Body>
+      </Accordion.Item>
+    </Accordion>`
+  )).join('');
+  const handlClickButton = useCallback(() => {
     if (typeof onClickButton === 'function') {
       onClickButton();
+      setPostShowComments((comment) => !comment);
+      if (postPicker.current) {
+        postPicker.current.innerHTML = showPostComments ? postComments : '';
+      }
     }
-  };
+  }, [onClickButton, showPostComments, postComments]);
 
   const handleClickCard = () => {
     if (typeof onClickImage === 'function') {
       onClickImage();
     }
   };
+
   return (
     <Card className="mb-2">
       <Container style={{ display: 'flex', flexDirection: 'row' }}>
@@ -53,19 +66,9 @@ export const Post: React.FC<PostProps> = ({
             variant="link"
             onClick={handlClickButton}
           >
-            {buttonText}
+            { showPostComments ? 'Показать коментарии' : 'Скрыть комментарии' }
           </Button>
-          {
-            showComments
-            && comments.map((comment) => (
-              <Accordion key={comment.id}>
-                <Accordion.Item eventKey={comment.id.toString()}>
-                  <Accordion.Header>{comment.email}</Accordion.Header>
-                  <Accordion.Body>{comment.body}</Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
-            ))
-          }
+          <div ref={postPicker} />
         </Card.Body>
       </Container>
     </Card>

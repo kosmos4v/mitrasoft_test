@@ -1,4 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { TRootState } from '../../redux/reducers';
@@ -25,16 +29,17 @@ const comments = [
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(true);
   const handleClickCard = useCallback(() => {
     navigate('/user');
   }, [navigate]);
   const handleClickComments = useCallback(() => {
     setShowComments((show) => !show);
-    console.log(showComments);
   }, [setShowComments]);
   const { posts } = useSelector((state: TRootState) => state.post);
+
   useEffect(() => { dispatch(loadPosts()); }, [dispatch]);
+
   return (
     <div>
       {posts?.map((post) => (
@@ -42,11 +47,10 @@ export const Main: React.FC = () => {
           key={post.id}
           title={post.title}
           text={post.text}
-          buttonText={showComments ? 'Скрыть комментарии' : 'Показать комментарии'}
           onClickImage={handleClickCard}
           onClickButton={handleClickComments}
-          showComments={showComments}
           comments={comments}
+          showComments={showComments}
         />
       ))}
     </div>
