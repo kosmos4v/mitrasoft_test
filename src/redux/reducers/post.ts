@@ -24,7 +24,7 @@ const initialState: TPostState = {
   posts: undefined,
 };
 
-export const postReducer = handleActions<TPostState, TPostAction>({
+const postReducer = handleActions<TPostState, TPostAction>({
   [LOAD_POSTS_PENDING]: (state, { payload }) => ({
     ...state,
     isLoadPostPending: payload.isLoadPostPending,

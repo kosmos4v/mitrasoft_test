@@ -1,11 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   Card,
   Button,
   Container,
 } from 'react-bootstrap';
 import Comment from '../Comment';
+import { loadComments } from '../../redux/actions/comment';
 
 type TPostProps = {
   title: string,
@@ -19,13 +21,14 @@ export const Post: React.FC<TPostProps> = ({
   id,
 }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showComments, setShowComments] = useState(false);
 
   const handlClickButton = useCallback(() => {
-    console.log('id', id);
     setShowComments((comment) => !comment);
-  }, [setShowComments]);
+    dispatch(loadComments(id));
+  }, [setShowComments, dispatch, id]);
 
   const handleClickImage = useCallback(() => {
     navigate('/user');

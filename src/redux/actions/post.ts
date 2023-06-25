@@ -28,4 +28,5 @@ export const loadPostsFailure = (error: string) => ({
   payload: {
     error,
   },
+
 });
