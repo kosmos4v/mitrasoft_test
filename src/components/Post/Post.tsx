@@ -1,53 +1,32 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
-  Button, Container,
-  Accordion,
+  Button,
+  Container,
 } from 'react-bootstrap';
-import { TComment } from '../../models/comment';
+import Comment from '../Comment';
 
 type TPostProps = {
   title: string,
   text: string,
-  onClickImage?: () => void,
-  onClickButton?: () => void,
-  comments: TComment[];
-  showComments: boolean,
 };
 
 export const Post: React.FC<TPostProps> = ({
   title = '',
   text = '',
-  onClickImage,
-  onClickButton,
-  comments,
-  showComments = true,
 }) => {
-  const postPicker = React.useRef<HTMLDivElement>(null);
-  const [showPostComments, setPostShowComments] = useState(showComments);
-  const postComments: string = comments.map((comment) => (
-    `$<Accordion key=${comment.id}>
-      <Accordion.Item eventKey=${comment.id.toString()}>
-        <Accordion.Header>${comment.email}</Accordion.Header>
-        <Accordion.Body>${comment.body}</Accordion.Body>
-      </Accordion.Item>
-    </Accordion>`
-  )).join('');
-  const handlClickButton = useCallback(() => {
-    if (typeof onClickButton === 'function') {
-      onClickButton();
-      setPostShowComments((comment) => !comment);
-      if (postPicker.current) {
-        postPicker.current.innerHTML = showPostComments ? postComments : '';
-      }
-    }
-  }, [onClickButton, showPostComments, postComments]);
+  const navigate = useNavigate();
 
-  const handleClickCard = () => {
-    if (typeof onClickImage === 'function') {
-      onClickImage();
-    }
-  };
+  const [showComments, setShowComments] = useState(false);
+
+  const handlClickButton = useCallback(() => {
+    setShowComments((comment) => !comment);
+  }, [setShowComments]);
+
+  const handleClickImage = useCallback(() => {
+    navigate('/user');
+  }, [navigate]);
 
   return (
     <Card className="mb-2">
@@ -57,7 +36,7 @@ export const Post: React.FC<TPostProps> = ({
           src="/images/avatar.jpg"
           className="post__img mt-3"
           style={{ width: '100px', height: '100px', cursor: 'pointer' }}
-          onClick={handleClickCard}
+          onClick={handleClickImage}
         />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
@@ -66,9 +45,9 @@ export const Post: React.FC<TPostProps> = ({
             variant="link"
             onClick={handlClickButton}
           >
-            { showPostComments ? 'Показать коментарии' : 'Скрыть комментарии' }
+            { showComments ? 'Скрыть комментарии' : 'Показать коментарии' }
           </Button>
-          <div ref={postPicker} />
+          {showComments && <div>1</div>}
         </Card.Body>
       </Container>
     </Card>
