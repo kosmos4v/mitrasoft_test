@@ -1,4 +1,4 @@
-import { TincomingPost } from '../../models/post';
+import { TIncomingPost } from '../../models/post';
 
 export const LOAD_POSTS = 'LOAD_POSTS';
 export const LOAD_POSTS_PENDING = 'LOAD_POSTS_PENDING';
@@ -16,7 +16,7 @@ export const loadPostsPending = (isPending: boolean) => ({
   },
 });
 
-export const loadPostsSuccess = (incomingPosts: TincomingPost[]) => ({
+export const loadPostsSuccess = (incomingPosts: TIncomingPost[]) => ({
   type: LOAD_POSTS_SUCCESS,
   payload: {
     incomingPosts,

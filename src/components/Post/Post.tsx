@@ -10,17 +10,20 @@ import Comment from '../Comment';
 type TPostProps = {
   title: string,
   text: string,
+  id: number,
 };
 
 export const Post: React.FC<TPostProps> = ({
   title = '',
   text = '',
+  id,
 }) => {
   const navigate = useNavigate();
 
   const [showComments, setShowComments] = useState(false);
 
   const handlClickButton = useCallback(() => {
+    console.log('id', id);
     setShowComments((comment) => !comment);
   }, [setShowComments]);
 

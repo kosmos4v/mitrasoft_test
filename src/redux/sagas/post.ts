@@ -1,4 +1,4 @@
-import { put, call } from 'typed-redux-saga';
+import { put, call, delay } from 'typed-redux-saga';
 import { takeEvery } from 'redux-saga/effects';
 import {
   LOAD_POSTS,
@@ -11,6 +11,7 @@ import API from '../../api';
 function* loadPosts(): Generator {
   try {
     yield put(loadPostsPending(true));
+    yield call(delay, 5000);
     const incomingPosts = yield* call(API.getPosts);
     if (incomingPosts.data) yield put(loadPostsSuccess(incomingPosts.data));
     else yield put(loadPostsFailure('Не удалось загрузить посты'));

@@ -1,5 +1,5 @@
 import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
-import { TincomingPost } from '../models/post';
+import { TIncomingPost } from '../models/post';
 
 const baseURL = 'https://jsonplaceholder.typicode.com/';
 

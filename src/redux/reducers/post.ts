@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { TPost, TincomingPost } from '../../models/post';
+import { TPost, TIncomingPost } from '../../models/post';
 import {
   LOAD_POSTS_PENDING,
   LOAD_POSTS_SUCCESS,
@@ -15,7 +15,7 @@ export type TPostState = {
 export type TPostAction = {
   isLoadPostPending: boolean,
   error?: string,
-  incomingPosts?: TincomingPost[],
+  incomingPosts?: TIncomingPost[],
 };
 
 const initialState: TPostState = {
@@ -32,7 +32,7 @@ export const postReducer = handleActions<TPostState, TPostAction>({
 
   [LOAD_POSTS_SUCCESS]: (state, { payload }) => {
     const posts: TPost[] = payload.incomingPosts?.map((post) => ({
-      id: post.id.toString(),
+      id: post.id,
       title: post.title,
       text: post.body,
     })) || [];
