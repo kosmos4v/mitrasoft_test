@@ -3,9 +3,12 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from 'react-bootstrap/Spinner';
+import { Container } from 'react-bootstrap';
 import { TRootState } from '../../redux/reducers';
 import { loadPosts } from '../../redux/actions/post';
 import Post from '../../components/Post';
+
+import './Main.scss';
 
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,7 +19,7 @@ export const Main: React.FC = () => {
   }, [dispatch, isLoadPostPending, posts]);
 
   return (
-    <div>
+    <Container className="main__content">
       {isLoadPostPending
         ? (
           <div style={{
@@ -37,6 +40,6 @@ export const Main: React.FC = () => {
             text={post.body}
           />
         ))}
-    </div>
+    </Container>
   );
 };

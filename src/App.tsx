@@ -5,12 +5,13 @@ import store from './redux/store';
 import Main from './pages/Main';
 import Author from './pages/Author';
 import User from './pages/User';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Haeder';
 import './App.scss';
 
 function App() {
   return (
     <Provider store={store}>
+      <Header className="app__header" />
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
