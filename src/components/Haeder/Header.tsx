@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import classnames from 'classnames';
 import {
   Dropdown,
@@ -15,7 +15,12 @@ export type THeaderProps = {
 export const Header: React.FC<THeaderProps> = ({
   className,
 }) => {
+  const [searchValue, setSearchValue] = useState('');
   const { pathname } = useLocation();
+  const handleChangeSerchValue = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  }, [setSearchValue]);
+  console.log(searchValue);
   return (
     <div className={classnames('header', className)}>
       <Dropdown>
@@ -33,6 +38,8 @@ export const Header: React.FC<THeaderProps> = ({
         <Form.Control
           placeholder="Найти пост"
           aria-label="serch"
+          onChange={handleChangeSerchValue}
+          value={searchValue}
         />
       </InputGroup>
     </div>
