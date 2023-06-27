@@ -1,5 +1,8 @@
 import React from 'react';
+import Content from '../../components/common/Content';
 
 export const Author: React.FC = () => (
-  <div>Author</div>
+  <Content>
+    <div>Author</div>
+  </Content>
 );

@@ -11,8 +11,8 @@ import './App.scss';
 function App() {
   return (
     <Provider store={store}>
-      <Header className="app__header" />
       <Router>
+        <Header />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/author" element={<Author />} />

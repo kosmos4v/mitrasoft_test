@@ -3,4 +3,19 @@
     width: 100%;
     background-color: rgb(252, 252, 252);
     border-bottom: 1px solid rgb(212, 212, 212);
+    padding: 0 24px;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+
+    &__dropdown {
+        &__user-photo {
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          margin-right: 8px;
+        }
+    }
+
+    
 }
