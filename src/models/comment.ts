@@ -6,7 +6,4 @@ export type TIncomingComment = {
   body: string, // text
 };
 
-export type TComment = {
-  title: string,
-  body: string,
-};
+export type TCommentsByPostId = Record<number, TIncomingComment[]>;

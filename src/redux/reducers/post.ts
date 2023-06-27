@@ -30,19 +30,11 @@ const postReducer = handleActions<TPostState, TPostAction>({
     isLoadPostPending: payload.isLoadPostPending,
   }),
 
-  [LOAD_POSTS_SUCCESS]: (state, { payload }) => {
-    const posts: TPost[] = payload.incomingPosts?.map((post) => ({
-      id: post.id,
-      title: post.title,
-      text: post.body,
-    })) || [];
-
-    return ({
-      ...state,
-      posts,
-      loadPostError: undefined,
-    });
-  },
+  [LOAD_POSTS_SUCCESS]: (state, { payload }) => ({
+    ...state,
+    posts: payload.incomingPosts,
+    loadPostError: undefined,
+  }),
 
   [LOAD_POSTS_FAILURE]: (state, { payload }) => ({
     ...state,

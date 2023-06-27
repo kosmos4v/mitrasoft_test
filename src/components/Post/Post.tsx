@@ -1,34 +1,38 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Spinner from 'react-bootstrap/Spinner';
 import {
   Card,
   Button,
   Container,
 } from 'react-bootstrap';
 import Comment from '../Comment';
-import { loadComments } from '../../redux/actions/comment';
+import { loadCommentsByPostId } from '../../redux/actions/comment';
+import { TRootState } from '../../redux/reducers';
 
 type TPostProps = {
   title: string,
   text: string,
-  id: number,
+  postId: number,
 };
 
 export const Post: React.FC<TPostProps> = ({
   title = '',
   text = '',
-  id,
+  postId,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [showComments, setShowComments] = useState(false);
 
+  const { comments, isLoadCommentsPending } = useSelector((state: TRootState) => state.comment);
+
   const handlClickButton = useCallback(() => {
     setShowComments((comment) => !comment);
-    dispatch(loadComments(id));
-  }, [setShowComments, dispatch, id]);
+    if (!isLoadCommentsPending && !comments[postId]) dispatch(loadCommentsByPostId(postId));
+  }, [setShowComments, dispatch, postId, comments, isLoadCommentsPending]);
 
   const handleClickImage = useCallback(() => {
     navigate('/user');
@@ -53,7 +57,19 @@ export const Post: React.FC<TPostProps> = ({
           >
             { showComments ? 'Скрыть комментарии' : 'Показать коментарии' }
           </Button>
-          {showComments && <div>1</div>}
+          {showComments
+          && (
+            isLoadCommentsPending && !comments[postId]
+              ? <Spinner />
+              : comments[postId].map((comment) => (
+                <Comment
+                  key={comment.id}
+                  id={comment.id}
+                  header={comment.email}
+                  body={comment.body}
+                />
+              ))
+          )}
         </Card.Body>
       </Container>
     </Card>

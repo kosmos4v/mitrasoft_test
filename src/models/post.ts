@@ -1,16 +1,13 @@
-import { TComment } from './comment';
-
-export type TPost = {
-  id: number,
-  title: string,
-  text: string,
-  avatar?: string,
-  coments?: TComment[],
-};
+import { TIncomingComment } from './comment';
 
 export type TIncomingPost = {
   body: string,
   id: number,
   title: string,
   userId: number,
+};
+
+export type TPost = TIncomingPost & {
+  avatar?: string,
+  coments?: TIncomingComment[],
 };

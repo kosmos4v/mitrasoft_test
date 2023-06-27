@@ -11,7 +11,9 @@ export const Main: React.FC = () => {
   const dispatch = useDispatch();
   const { posts, isLoadPostPending } = useSelector((state: TRootState) => state.post);
 
-  useEffect(() => { dispatch(loadPosts()); }, [dispatch]);
+  useEffect(() => {
+    if (!isLoadPostPending && typeof posts === 'undefined') dispatch(loadPosts());
+  }, [dispatch, isLoadPostPending, posts]);
 
   return (
     <div>
@@ -29,10 +31,10 @@ export const Main: React.FC = () => {
         )
         : posts?.map((post) => (
           <Post
-            id={post.id}
+            postId={post.id}
             key={post.id}
             title={post.title}
-            text={post.text}
+            text={post.body}
           />
         ))}
     </div>

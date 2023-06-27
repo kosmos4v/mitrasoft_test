@@ -8,30 +8,29 @@ import { Action } from 'redux-actions';
 
 import API from '../../api';
 import {
-  LOAD_COMMENTS,
-  loadCommentsPending,
-  loadCommentsFailure,
-  loadCommentsSucces,
+  LOAD_COMMENTS_BY_POST_ID,
+  loadCommentsByPostIdPending,
+  loadCommentsByPostIdFailure,
+  loadCommentsByPostIdSucces,
 } from '../actions/comment';
 
-function* loadComments({ payload }: Action<{ id: number }>) {
+function* loadComments({ payload }: Action<{ postId: number }>) {
   try {
-    yield put(loadCommentsPending(true));
-    yield call(delay, 5000);
-    const incomingComments = yield* call(API.getComments, payload.id);
+    yield put(loadCommentsByPostIdPending(true));
+    yield call(delay, 500);
+    const incomingComments = yield* call(API.getComments, payload.postId);
     if (incomingComments.data) {
-      console.log(incomingComments);
-      yield put(loadCommentsSucces(incomingComments.data));
+      yield put(loadCommentsByPostIdSucces(incomingComments.data, payload.postId));
     } else {
-      yield put(loadCommentsFailure('Не удалось загрузить коментарии'));
+      yield put(loadCommentsByPostIdFailure('Не удалось загрузить коментарии'));
     }
   } catch (e) {
-    yield put(loadCommentsFailure('Не удалось загрузить коментарии'));
+    yield put(loadCommentsByPostIdFailure('Не удалось загрузить коментарии'));
   } finally {
-    yield put(loadCommentsPending(false));
+    yield put(loadCommentsByPostIdPending(false));
   }
 }
 
 export default function* commentSaga() {
-  yield takeEvery(LOAD_COMMENTS, loadComments);
+  yield takeEvery(LOAD_COMMENTS_BY_POST_ID, loadComments);
 }

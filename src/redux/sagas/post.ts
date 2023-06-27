@@ -11,7 +11,7 @@ import API from '../../api';
 function* loadPosts(): Generator {
   try {
     yield put(loadPostsPending(true));
-    yield call(delay, 5000);
+    yield call(delay, 500);
     const incomingPosts = yield* call(API.getPosts);
     if (incomingPosts.data) yield put(loadPostsSuccess(incomingPosts.data));
     else yield put(loadPostsFailure('Не удалось загрузить посты'));
