@@ -1,6 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Dropdown } from 'react-bootstrap';
+import {
+  Dropdown,
+  InputGroup,
+  Form,
+} from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import './Header.scss';
 
@@ -25,6 +29,12 @@ export const Header: React.FC<THeaderProps> = ({
           <Dropdown.Item disabled={pathname === '/author'} href="/author">Обо мне</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
+      <InputGroup className="m-1">
+        <Form.Control
+          placeholder="Найти пост"
+          aria-label="serch"
+        />
+      </InputGroup>
     </div>
   );
 };
