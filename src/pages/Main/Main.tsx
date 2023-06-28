@@ -13,7 +13,7 @@ import { TPost } from '../../models/post';
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
   const { posts, isLoadPostPending } = useSelector((state: TRootState) => state.post);
-  const { searchValue } = useSelector((state: TRootState) => state.filter);
+  const { searchValue, ascendingSort } = useSelector((state: TRootState) => state.filter);
 
   const filteredPostsByeSearch: TPost[] | undefined = useMemo(() => {
     const filteredPosts = posts?.filter(({ title }) => title
@@ -22,6 +22,13 @@ export const Main: React.FC = () => {
         .toLowerCase()));
     return filteredPosts;
   }, [posts, searchValue]);
+
+  const sortedPosts: TPost[] | undefined = useMemo(() => {
+    const filteredPosts = filteredPostsByeSearch?.concat();
+    return ascendingSort
+      ? filteredPosts?.sort((min, max) => min.title.localeCompare(max.title))
+      : filteredPosts?.sort((min, max) => max.title.localeCompare(min.title));
+  }, [filteredPostsByeSearch, ascendingSort]);
 
   useEffect(() => {
     if (!isLoadPostPending && typeof posts === 'undefined') dispatch(loadPosts());
@@ -41,7 +48,7 @@ export const Main: React.FC = () => {
             <Spinner animation="border" role="status" />
           </div>
         )
-        : filteredPostsByeSearch?.map((post) => (
+        : sortedPosts?.map((post) => (
           <Post
             postId={post.id}
             key={post.id}

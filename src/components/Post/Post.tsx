@@ -39,7 +39,7 @@ export const Post: React.FC<TPostProps> = ({
   }, [navigate]);
 
   return (
-    <Card className="mb-2">
+    <Card className="mb-2" border="primary">
       <Container style={{ display: 'flex', flexDirection: 'row' }}>
         <Card.Img
           variant="left"

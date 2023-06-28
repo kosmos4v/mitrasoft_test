@@ -8,7 +8,7 @@ import {
   Button,
 } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { filterPostBySerch } from '../../redux/actions/filter';
+import { filterPostsBySearch, sortPosts } from '../../redux/actions/filter';
 
 import './Header.scss';
 
@@ -20,6 +20,7 @@ export const Header: React.FC<THeaderProps> = ({
   className,
 }) => {
   const [searchValue, setSearchValue] = useState('');
+  const [ascendingSort, setAscendingSort] = useState(true);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
@@ -29,11 +30,19 @@ export const Header: React.FC<THeaderProps> = ({
 
   const handleCleanSearchValue = useCallback(() => {
     setSearchValue('');
-  }, []);
+  }, [setSearchValue]);
+
+  const handleSortPost = useCallback(() => {
+    setAscendingSort(!ascendingSort);
+  }, [ascendingSort]);
 
   useEffect(() => {
-    dispatch(filterPostBySerch(searchValue));
+    dispatch(filterPostsBySearch(searchValue));
   }, [dispatch, searchValue]);
+
+  useEffect(() => {
+    dispatch(sortPosts(ascendingSort));
+  }, [dispatch, ascendingSort]);
 
   return (
     <div className={classnames('header', className)}>
@@ -48,18 +57,24 @@ export const Header: React.FC<THeaderProps> = ({
         </Dropdown.Menu>
       </Dropdown>
       <InputGroup className="m-1">
+        <Button
+          variant="outline-primary"
+          size="sm"
+          onClick={handleSortPost}
+        >
+          {`Сортировать ${ascendingSort ? 'А-Я' : 'Я-А'}`}
+        </Button>
         <Form.Control
           placeholder="Найти пост"
-          aria-label="serch"
           onChange={handleChangeSerchValue}
           value={searchValue}
         />
         <Button
-          variant="warning"
+          variant="outline-primary"
           size="sm"
           onClick={handleCleanSearchValue}
         >
-          <img alt="cross-icon" src="/icons/cross-in-circle.svg" />
+          <img alt="cross-icon" src="/icons/cross-in-circle.svg" style={{ height: '20px' }} />
         </Button>
       </InputGroup>
     </div>
