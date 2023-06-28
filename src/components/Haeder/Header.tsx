@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import classnames from 'classnames';
 import {
   Dropdown,
   InputGroup,
   Form,
+  Button,
 } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { filterPostBySerch } from '../../redux/actions/filter';
 
 import './Header.scss';
-import { TRootState } from '../../redux/reducers';
 
 export type THeaderProps = {
   className?: string,
@@ -22,9 +22,14 @@ export const Header: React.FC<THeaderProps> = ({
   const [searchValue, setSearchValue] = useState('');
   const { pathname } = useLocation();
   const dispatch = useDispatch();
+
   const handleChangeSerchValue = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value.replace(/^\s+|\s+(?=\s)/g, ''));
   }, [setSearchValue]);
+
+  const handleCleanSearchValue = useCallback(() => {
+    setSearchValue('');
+  }, []);
 
   useEffect(() => {
     dispatch(filterPostBySerch(searchValue));
@@ -37,7 +42,6 @@ export const Header: React.FC<THeaderProps> = ({
           <img className="header__dropdown__user-photo" src="/images/avatar.jpg" alt="user_photo" />
           Валерий
         </Dropdown.Toggle>
-
         <Dropdown.Menu>
           <Dropdown.Item disabled={pathname === '/'} href="/">Список постов</Dropdown.Item>
           <Dropdown.Item disabled={pathname === '/author'} href="/author">Обо мне</Dropdown.Item>
@@ -50,6 +54,13 @@ export const Header: React.FC<THeaderProps> = ({
           onChange={handleChangeSerchValue}
           value={searchValue}
         />
+        <Button
+          variant="warning"
+          size="sm"
+          onClick={handleCleanSearchValue}
+        >
+          <img alt="cross-icon" src="/icons/cross-in-circle.svg" />
+        </Button>
       </InputGroup>
     </div>
   );
