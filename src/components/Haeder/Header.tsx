@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import classnames from 'classnames';
 import {
   Dropdown,
@@ -6,7 +7,10 @@ import {
   Form,
 } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
+import { filterPostBySerch } from '../../redux/actions/filter';
+
 import './Header.scss';
+import { TRootState } from '../../redux/reducers';
 
 export type THeaderProps = {
   className?: string,
@@ -17,10 +21,15 @@ export const Header: React.FC<THeaderProps> = ({
 }) => {
   const [searchValue, setSearchValue] = useState('');
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const handleChangeSerchValue = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+    setSearchValue(event.target.value.replace(/^\s+|\s+(?=\s)/g, ''));
   }, [setSearchValue]);
-  console.log(searchValue);
+
+  useEffect(() => {
+    dispatch(filterPostBySerch(searchValue));
+  }, [dispatch, searchValue]);
+
   return (
     <div className={classnames('header', className)}>
       <Dropdown>

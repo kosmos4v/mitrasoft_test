@@ -12,7 +12,7 @@ export type TCommentState = {
   loadCommentsError?: string,
 };
 
-export type TCommentsAction = {
+export type TCommentAction = {
   commentsByPostId: TIncomingComment[],
   isLoadCommentsPending: boolean,
   postId: number,
@@ -25,7 +25,7 @@ const initialState: TCommentState = {
   loadCommentsError: undefined,
 };
 
-const CommentReducer = handleActions<TCommentState, TCommentsAction>({
+const CommentReducer = handleActions<TCommentState, TCommentAction>({
 
   [LOAD_COMMENTS_BY_POST_ID_PENDING]: (state, { payload }) => ({
     ...state,
