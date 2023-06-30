@@ -16,7 +16,7 @@ export const Author: React.FC = () => (
         </div>
       </div>
     </Card>
-    <Card className="p-5" border="light">
+    <Card className="p-5" border="primary">
       <Card.Title>Akkords.net - гитарные аккорды и обучение</Card.Title>
       <Card.Text className="m-1">Санкт-Петербург, akkords.dalimteam.ru/</Card.Text>
       <Card.Title className="p-2">Frontend developer</Card.Title>
@@ -32,9 +32,9 @@ export const Author: React.FC = () => (
         Стек: React / Redux-Saga / Sass / TypeScript;
 
       </Card.Text>
-      <Card.Text className="m-1">Июнь 2021 — февраль 2022</Card.Text>
+      <Card.Text className="m-1">Февраль 2022 — по настоящее время</Card.Text>
     </Card>
-    <Card className="p-5" border="light">
+    <Card className="p-5" border="primary">
       <Card.Title>Onerollo - CRM система для управления частными школами</Card.Title>
       <Card.Text className="m-1">Шотландия, onerollo.com</Card.Text>
       <Card.Title className="p-2">Frontend developer</Card.Title>
@@ -50,7 +50,7 @@ export const Author: React.FC = () => (
       </Card.Text>
       <Card.Text className="m-1">Июнь 2021 — февраль 2022</Card.Text>
     </Card>
-    <Card className="p-5" border="light">
+    <Card className="p-5" border="primary">
       <Card.Title>VistaJet</Card.Title>
       <Card.Text className="m-1">www.vistajet.com/</Card.Text>
       <Card.Title className="p-2">Frontend developer</Card.Title>
