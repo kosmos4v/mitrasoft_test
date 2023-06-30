@@ -1,0 +1,21 @@
+.author {
+  
+  &__card {
+    display: flex;
+    justify-content: space-between;
+
+    &_wrapper {
+      margin-top: 18px;
+      margin-right: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+    }
+    
+    &__image {
+      max-width: 150px;
+      height: 150px;
+    }
+  }
+}
