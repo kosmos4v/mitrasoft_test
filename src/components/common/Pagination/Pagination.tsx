@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pagination } from 'react-bootstrap';
+import './Pagination.scss';
 
 type PaginationProps = {
   currentPage: number
@@ -38,7 +39,7 @@ export const PaginationComponent: React.FC<PaginationProps> = ({
   if (items.length === 0) return null;
 
   return (
-    <Pagination size="sm">
+    <Pagination size="sm" className="pagination">
       <Pagination.First
         disabled={currentPage === 1}
         onClick={onSelect(1)}
@@ -48,12 +49,6 @@ export const PaginationComponent: React.FC<PaginationProps> = ({
         disabled={currentPage === 1}
       />
       {items}
-      {/* {items[startPage - 1]} */}
-      {/* <Pagination.Ellipsis /> */}
-      {/* {items.slice(startPage, 11)} */}
-      {/* <Pagination.Ellipsis /> */}
-      {/* {items[totalPages - 1]} */}
-
       <Pagination.Next
         onClick={onSelect(currentPage + 1)}
         disabled={!!(currentPage >= items.length)}

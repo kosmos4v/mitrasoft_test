@@ -21,6 +21,7 @@ export const Main: React.FC = () => {
   const { searchValue, ascendingSort } = useSelector((state: TRootState) => state.filter);
 
   const filteredPostsByeSearch: TPost[] | undefined = useMemo(() => {
+    setCurrentPage(1);
     const filteredPosts = posts?.filter(({ title }) => title
       .toLowerCase()
       .includes(searchValue
@@ -53,32 +54,34 @@ export const Main: React.FC = () => {
 
   return (
     <Content>
+      <div>
+        {isLoadPostPending
+          ? (
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100vh',
+            }}
+            >
+              <Spinner animation="border" role="status" />
+            </div>
+          )
+          : paginatedPosts?.map((post) => (
+            <Post
+              postId={post.id}
+              key={post.id}
+              title={post.title}
+              text={post.body}
+            />
+          ))}
+      </div>
       <Pagination
         onSelect={handleSelectPage}
         pageSize={pageSize}
         currentPage={currentPage}
         pages={sortedPosts?.length}
       />
-      {isLoadPostPending
-        ? (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100vh',
-          }}
-          >
-            <Spinner animation="border" role="status" />
-          </div>
-        )
-        : paginatedPosts?.map((post) => (
-          <Post
-            postId={post.id}
-            key={post.id}
-            title={post.title}
-            text={post.body}
-          />
-        ))}
     </Content>
 
   );
