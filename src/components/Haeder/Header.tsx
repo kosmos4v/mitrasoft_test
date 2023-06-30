@@ -56,6 +56,7 @@ export const Header: React.FC<THeaderProps> = ({
           <Dropdown.Item disabled={pathname === '/author'} href="/author">Обо мне</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
+      {pathname === '/' && (
       <InputGroup className="m-1">
         <Button
           variant="outline-primary"
@@ -77,6 +78,7 @@ export const Header: React.FC<THeaderProps> = ({
           <img alt="cross-icon" src="/icons/cross-in-circle.svg" style={{ height: '20px' }} />
         </Button>
       </InputGroup>
+      )}
     </div>
   );
 };

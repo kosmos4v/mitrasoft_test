@@ -2,7 +2,6 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +15,6 @@ import { TPost } from '../../models/post';
 
 export const Main: React.FC = () => {
   const pageSize = 10;
-  const paginationButtonRef = useRef<HTMLButtonElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
   const { posts, isLoadPostPending } = useSelector((state: TRootState) => state.post);
@@ -73,6 +71,7 @@ export const Main: React.FC = () => {
           : paginatedPosts?.map((post) => (
             <Post
               postId={post.id}
+              userId={post.userId}
               key={post.id}
               title={post.title}
               text={post.body}

@@ -1,5 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import Main from './pages/Main';
@@ -16,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/author" element={<Author />} />
-          <Route path="/user" element={<User />} />
+          <Route path="/user/:id" element={<User />} />
         </Routes>
       </Router>
     </Provider>

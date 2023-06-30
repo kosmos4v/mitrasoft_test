@@ -15,12 +15,14 @@ type TPostProps = {
   title: string,
   text: string,
   postId: number,
+  userId?: number,
 };
 
 export const Post: React.FC<TPostProps> = ({
   title = '',
   text = '',
   postId,
+  userId,
 }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,8 +37,8 @@ export const Post: React.FC<TPostProps> = ({
   }, [setShowComments, dispatch, postId, comments, isLoadCommentsPending]);
 
   const handleClickImage = useCallback(() => {
-    navigate('/user');
-  }, [navigate]);
+    if (userId) navigate(`/user/${userId}`);
+  }, [navigate, userId]);
 
   return (
     <Card className="mb-2" border="primary">
