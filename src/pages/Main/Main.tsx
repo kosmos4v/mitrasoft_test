@@ -55,29 +55,27 @@ export const Main: React.FC = () => {
 
   return (
     <Content>
-      <div>
-        {isLoadPostPending
-          ? (
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100vh',
-            }}
-            >
-              <Spinner animation="border" role="status" />
-            </div>
-          )
-          : paginatedPosts?.map((post) => (
-            <Post
-              postId={post.id}
-              userId={post.userId}
-              key={post.id}
-              title={post.title}
-              text={post.body}
-            />
-          ))}
-      </div>
+      {isLoadPostPending
+        ? (
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100vh',
+          }}
+          >
+            <Spinner animation="border" role="status" />
+          </div>
+        )
+        : paginatedPosts?.map((post) => (
+          <Post
+            postId={post.id}
+            userId={post.userId}
+            key={post.id}
+            title={post.title}
+            text={post.body}
+          />
+        ))}
       <Pagination
         onSelect={handleSelectPage}
         pageSize={pageSize}
