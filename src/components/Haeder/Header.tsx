@@ -8,7 +8,7 @@ import {
   Button,
 } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { filterPostsBySearch, sortPosts } from '../../redux/actions/filter';
+import { filterPostsBySearch, sortPosts } from '../../redux/actions/filters';
 
 import './Header.scss';
 

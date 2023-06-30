@@ -22,16 +22,12 @@ export const Author: React.FC = () => (
       <Card.Title className="p-2">Frontend developer</Card.Title>
       <Card.Text className="m-2 p-2">Работа вместе с владельцем продукта и командой: 3 фронта, 1 бэк, 1 дизайнер, PM, product owner, над созданием и развитием образовательного проекта.</Card.Text>
       <Card.Text className="m-1">
-        <p>Полностью удаленная работа full-time, обязанности:</p>
-        <p>
-          - создание и расширение имеющихся common-компонентов ui-kit, публикация их в Storybook;
-        </p>
-        <p>- полностью адаптивная верстка (CSS Flexbox)</p>
-        <p>- внедрение дизайна пользовательского интерфейса с использованием HTML5 и SASS</p>
-
-        Стек: React / Redux-Saga / Sass / TypeScript;
-
+        Полностью удаленная работа full-time, обязанности:
+        создание и расширение имеющихся common-компонентов ui-kit,
+        публикация их в Storybook, полностью адаптивная верстка (CSS Flexbox),
+        внедрение дизайна пользовательского интерфейса с использованием HTML5 и SASS
       </Card.Text>
+      <Card.Text className="m-1">Стек: React / Redux-Saga / Sass / TypeScript;</Card.Text>
       <Card.Text className="m-1">Февраль 2022 — по настоящее время</Card.Text>
     </Card>
     <Card className="p-5" border="primary">
@@ -40,14 +36,12 @@ export const Author: React.FC = () => (
       <Card.Title className="p-2">Frontend developer</Card.Title>
       <Card.Text className="m-2 p-2">Система управлением лидами в лице студентов в частные школы и университеты. Core команда: 3 фронта, 1 бэк, дизайнер, 1 datascience, PM, product owner.</Card.Text>
       <Card.Text className="m-1">
-        <p>Полностью удаленная работа full-time, обязанности:</p>
-        <p>- создание новых компонентов по дизайнам из figma;</p>
-        <p>- создание и расширение имеющихся common-компонентов ui-kit;</p>
-        <p>- работа по SCRUM;</p>
-
-        Стек: React / Redux-Saga / Sass / TypeScript;
-
+        Полностью удаленная работа full-time, обязанности:
+        создание новых компонентов по дизайнам из figma,
+        создание и расширение имеющихся common-компонентов ui-kit,
+        работа по SCRUM;
       </Card.Text>
+      <Card.Text className="m-1">Стек: React / Redux-Saga / Sass / TypeScript;</Card.Text>
       <Card.Text className="m-1">Июнь 2021 — февраль 2022</Card.Text>
     </Card>
     <Card className="p-5" border="primary">

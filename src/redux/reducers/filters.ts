@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { FILTER_POSTS_BY_SEARCH, SORT_POSTS } from '../actions/filter';
+import { FILTER_POSTS_BY_SEARCH, SORT_POSTS } from '../actions/filters';
 
 export type TFilterState = {
   searchValue: string,
